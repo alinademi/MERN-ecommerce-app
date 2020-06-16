@@ -4,7 +4,7 @@ const expressJwt = require("express-jwt"); // auth check
 
 const { errorHandler } = require("../helpers/dbErrorHandler");
 
-// signup method
+// signup method /////
 exports.signup = (req, res) => {
   console.log("req.body", req.body);
   const user = new User(req.body);
@@ -24,7 +24,7 @@ exports.signup = (req, res) => {
   });
 };
 
-// signin method
+// signin method //////
 exports.signin = (req, res) => {
   // find user by email
   const { email, password } = req.body;
@@ -50,4 +50,11 @@ exports.signin = (req, res) => {
     const { _id, name, email, role } = user;
     return res.json({ token, user: { _id, email, name, role } });
   });
+};
+
+// signout method /////
+
+exports.signout = (req, res) => {
+  res.clearCookie("t");
+  res.json({ message: "You have successfully signed out" });
 };
