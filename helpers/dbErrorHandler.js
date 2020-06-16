@@ -6,7 +6,7 @@
 const uniqueMessage = (error) => {
   let output;
   try {
-    //grab the readable parts of the error message
+    //grab readable parts of the error message
     const fieldName = error.message.substring(
       error.message.lastIndexOf(".$") + 2,
       error.message.lastIndexOf("_1")

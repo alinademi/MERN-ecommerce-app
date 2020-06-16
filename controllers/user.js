@@ -10,6 +10,10 @@ exports.signup = (req, res) => {
         err: errorHandler(err),
       });
     }
+    // setting these two as undefined to avoid showing sensible data in response body
+    user.salt = undefined;
+    user.hashed_password = undefined;
+
     res.json({
       user,
     });
