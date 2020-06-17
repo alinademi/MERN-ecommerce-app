@@ -65,3 +65,24 @@ exports.requireSignin = expressJwt({
   secret: process.env.JWT_SECRET,
   userProperty: "auth",
 });
+
+// auth method to limit access for users to only their own profile
+exports.isAuth = (req, res, next) => {
+  let user = req.profile && req.auth && req.profile._id == req.auth._id;
+  if (!user) {
+    return res.status(403).json({
+      error: "Access denied",
+    });
+  }
+  next();
+};
+
+// auth method for admin (role zero) to prevent access of other users to admin resources
+exports.isAdmin = (req, res, next) => {
+  if (req.profile.role === 0) {
+    return res.status(403).json({
+      error: "Admin resource! Access denied",
+    });
+  }
+  next();
+};
