@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 //requiring user controller functions
-const { signup, signin, signout } = require("../controllers/user");
+const { signup, signin, signout } = require("../controllers/auth");
 const { userSignupValidator } = require("../validator");
 
 //signup route /////

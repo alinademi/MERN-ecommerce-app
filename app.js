@@ -4,13 +4,12 @@ const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const expressValidator = require("express-validator");
 
-// port /////
-const port = process.env.PORT || 8000;
 // environment variables /////
 require("dotenv").config();
 
 // importing routes /////
-const userRoutes = require("./routes/userRoutes");
+const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/user");
 
 // app /////
 const app = express();
@@ -31,7 +30,11 @@ app.use(cookieParser());
 app.use(expressValidator());
 
 // routes middleware /////
+app.use("/api", authRoutes);
 app.use("/api", userRoutes);
+
+// port /////
+const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
