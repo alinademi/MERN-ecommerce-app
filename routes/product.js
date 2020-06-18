@@ -29,7 +29,7 @@ router.delete(
   remove
 );
 
-//Route for deleting a product /////
+//Route for updating a product /////
 //
 router.put(
   "/product/:productId/:userId",
