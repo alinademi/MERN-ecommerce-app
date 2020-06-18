@@ -3,7 +3,10 @@ const _ = require("lodash");
 const fs = require("fs");
 const Product = require("../models/productModel");
 const { errorHandler } = require("../helpers/dbErrorHandler");
+const { error } = require("console");
 
+// method to get a product by id /////
+//
 exports.productById = (req, res, next, id) => {
   Product.findById(id).exec((err, product) => {
     if (err || !product) {
@@ -16,12 +19,15 @@ exports.productById = (req, res, next, id) => {
   });
 };
 
-// method for sending product data to frontend
+// method for sending product data to frontend /////
+//
 exports.read = (req, res) => {
   req.product.photo = undefined;
   return res.json(req.product);
 };
 
+// method for adding a product /////
+//
 exports.create = (req, res) => {
   let form = new formidable.IncomingForm();
   form.keepExtensions = true;
@@ -32,7 +38,7 @@ exports.create = (req, res) => {
       });
     }
 
-    // Validate form fields before creating products
+    // Validate form fields before creating product
     const { name, description, price, category, quantity, shipping } = fields;
 
     if (
@@ -68,6 +74,26 @@ exports.create = (req, res) => {
         });
       }
       res.json(result);
+    });
+  });
+};
+
+// method for deleting a product /////
+//
+exports.remove = (req, res) => {
+  let product = req.product;
+  product.remove((err, deletedProduct) => {
+    if (err) {
+      return (
+        res,
+        status(400).json({
+          error: errorHandler(err),
+        })
+      );
+    }
+
+    res.json({
+      message: "Product has been successfully removed",
     });
   });
 };
