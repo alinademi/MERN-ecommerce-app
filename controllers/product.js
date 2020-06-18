@@ -3,7 +3,6 @@ const _ = require("lodash");
 const fs = require("fs");
 const Product = require("../models/productModel");
 const { errorHandler } = require("../helpers/dbErrorHandler");
-const { error } = require("console");
 
 // method to get a product by id /////
 //
