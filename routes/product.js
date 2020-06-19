@@ -10,6 +10,7 @@ const {
   list,
   listRelated,
   listCategories,
+  listBySearch,
 } = require("../controllers/product");
 const { requireSignin, isAuth, isAdmin } = require("../controllers/auth");
 const { userById } = require("../controllers/user");
@@ -53,6 +54,10 @@ router.get("/products/related/:productId", listRelated);
 // list product categories (only those for products excluding other categories)
 //
 router.get("/products/categories", listCategories);
+
+// list products by search query
+//
+router.post("/products/by/search", listBySearch); //it's post to be able to access request body and paly with it
 
 // if there is user is in the route as parameter,
 // then run userById and populate the user and add product
