@@ -155,7 +155,7 @@ exports.update = (req, res) => {
   });
 };
 
-//Method to request and sort products based on different parameters
+//Method to request and sort products based on different parameters /////
 //
 // sort by sold = /products/?sortBy=sold&order=desc&limit=4
 // sort by arrival = /products/?sortBy=createdAt&order=desc&limit=9
@@ -172,6 +172,25 @@ exports.list = (req, res) => {
     //as typeof mongoose object id and refers to category model
     .sort([[sortBy, order]])
     .limit(limit)
+    .exec((err, products) => {
+      if (err) {
+        return res.status(400).json({
+          error: "No products found",
+        });
+      }
+      res.json(products);
+    });
+};
+
+// list related products /////
+// find products based on requested product's category
+//
+exports.listRelated = (req, res) => {
+  let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+  // find other products excluding self.
+  Product.find({ _id: { $ne: req.product }, category: req.product.category }) // $ne means not included in MongoDB
+    .limit(limit)
+    .populate("category", "_id name") //only populate id and name fields
     .exec((err, products) => {
       if (err) {
         return res.status(400).json({

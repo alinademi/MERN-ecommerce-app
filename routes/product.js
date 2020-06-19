@@ -8,6 +8,7 @@ const {
   remove,
   update,
   list,
+  listRelated,
 } = require("../controllers/product");
 const { requireSignin, isAuth, isAdmin } = require("../controllers/auth");
 const { userById } = require("../controllers/user");
@@ -40,9 +41,13 @@ router.put(
   update
 );
 
-// get all products
+// get all products /////
 //
 router.get("/products", list);
+
+// get related products /////
+//
+router.get("/products/related/:productId", listRelated);
 
 // if there is user is in the route as parameter,
 // then run userById and populate the user and add product
