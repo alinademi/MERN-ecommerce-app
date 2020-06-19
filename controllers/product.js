@@ -200,3 +200,18 @@ exports.listRelated = (req, res) => {
       res.json(products);
     });
 };
+
+// list product categories (only those for products, excluding other categories)
+//
+exports.listCategories = (req, res) => {
+  // get categories that are distinct from other categories by products
+  //https://docs.mongodb.com/manual/reference/method/db.collection.distinct/
+  Product.distinct("category", {}, (err, categories) => {
+    if (err) {
+      return res.status(400).json({
+        error: "No product categories found",
+      });
+    }
+    res.json(categories);
+  });
+};
