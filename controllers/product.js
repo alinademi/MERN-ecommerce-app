@@ -154,3 +154,30 @@ exports.update = (req, res) => {
     });
   });
 };
+
+//Method to request and sort products based on different parameters
+//
+// sort by sold = /products/?sortBy=sold&order=desc&limit=4
+// sort by arrival = /products/?sortBy=createdAt&order=desc&limit=9
+// return all products if there are no params in the route
+
+exports.list = (req, res) => {
+  let order = req.query.order ? req.query.order : "asc";
+  let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+  let limit = req.query.limit ? parseInt(req.query.limit) : 9;
+
+  Product.find()
+    .select("-photo")
+    .populate("category") // this is possible because in the schema model I made category
+    //as typeof mongoose object id and refers to category model
+    .sort([[sortBy, order]])
+    .limit(limit)
+    .exec((err, products) => {
+      if (err) {
+        return res.status(400).json({
+          error: "No products found",
+        });
+      }
+      res.json(products);
+    });
+};

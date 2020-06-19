@@ -7,6 +7,7 @@ const {
   read,
   remove,
   update,
+  list,
 } = require("../controllers/product");
 const { requireSignin, isAuth, isAdmin } = require("../controllers/auth");
 const { userById } = require("../controllers/user");
@@ -38,6 +39,10 @@ router.put(
   isAdmin,
   update
 );
+
+// get all products
+//
+router.get("/products", list);
 
 // if there is user is in the route as parameter,
 // then run userById and populate the user and add product
