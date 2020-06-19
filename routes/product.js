@@ -11,6 +11,7 @@ const {
   listRelated,
   listCategories,
   listBySearch,
+  photo,
 } = require("../controllers/product");
 const { requireSignin, isAuth, isAdmin } = require("../controllers/auth");
 const { userById } = require("../controllers/user");
@@ -54,6 +55,10 @@ router.get("/products/related/:productId", listRelated);
 // list product categories (only those for products excluding other categories)
 //
 router.get("/products/categories", listCategories);
+
+//get product photo
+//
+router.get("/product/photo/:productId", photo);
 
 // list products by search query
 //
