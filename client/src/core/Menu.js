@@ -2,47 +2,46 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 
 const isActive = (history, path) => {
-    if (history.location.pathname === path) {
-        return { color: "#ff9900" };
-    } else {
-        return { color: "#ffffff" };
-    }
+  // if browser history and our path match then apply this class else apply else class
+  if (history.location.pathname === path) {
+    return { color: "#ff9900" };
+  } else {
+    return { color: "#ffffff" };
+  }
 };
 
-const Menu = ({ history }) => (
-    <div>
-        <ul className="nav nav-tabs bg-primary">
-            <li className="nav-item">
-                <Link
-                    className="nav-link"
-                    style={isActive(history, "/")}
-                    to="/"
-                >
-                    Home
-                </Link>
-            </li>
+const Menu = (
+  { history } //destructured history prop instead of typing props up here and then use props.history on the component
+) => (
+  <div>
+    <ul className="nav nav-tabs bg-primary">
+      <li className="nav-item">
+        <Link className="nav-link" style={isActive(history, "/")} to="/">
+          Home
+        </Link>
+      </li>
 
-            <li className="nav-item">
-                <Link
-                    className="nav-link"
-                    style={isActive(history, "/signin")}
-                    to="/signin"
-                >
-                    Signin
-                </Link>
-            </li>
+      <li className="nav-item">
+        <Link
+          className="nav-link"
+          style={isActive(history, "/signin")}
+          to="/signin"
+        >
+          Signin
+        </Link>
+      </li>
 
-            <li className="nav-item">
-                <Link
-                    className="nav-link"
-                    style={isActive(history, "/signup")}
-                    to="/signup"
-                >
-                    Signup
-                </Link>
-            </li>
-        </ul>
-    </div>
+      <li className="nav-item">
+        <Link
+          className="nav-link"
+          style={isActive(history, "/signup")}
+          to="/signup"
+        >
+          Signup
+        </Link>
+      </li>
+    </ul>
+  </div>
 );
 
 export default withRouter(Menu);
