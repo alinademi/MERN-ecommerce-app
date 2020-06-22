@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { signout, isAuthenticated } from "../auth";
 
@@ -16,6 +16,16 @@ const Menu = ({ history }) => (
       <li className="nav-item">
         <Link className="nav-link" style={isActive(history, "/")} to="/">
           Home
+        </Link>
+      </li>
+
+      <li className="nav-item">
+        <Link
+          className="nav-link"
+          style={isActive(history, "/shop")}
+          to="/shop"
+        >
+          Shop
         </Link>
       </li>
 
@@ -44,7 +54,7 @@ const Menu = ({ history }) => (
       )}
 
       {!isAuthenticated() && (
-        <>
+        <Fragment>
           <li className="nav-item">
             <Link
               className="nav-link"
@@ -64,7 +74,7 @@ const Menu = ({ history }) => (
               Signup
             </Link>
           </li>
-        </>
+        </Fragment>
       )}
 
       {isAuthenticated() && (
