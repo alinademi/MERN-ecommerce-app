@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
-import { createProduct } from "./apiAdmin";
+import { createProduct, getCategories } from "./apiAdmin";
 
 const AddProduct = () => {
   const [values, setValues] = useState({
@@ -41,6 +41,25 @@ const AddProduct = () => {
   // whenever handleChange happened, change the state and populate the new formData that is being sent ot the backend
   useEffect(() => {
     setValues({ ...values, formData: new FormData() });
+  }, []);
+
+  // load categories and set form data
+  const init = () => {
+    getCategories().then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
+        setValues({
+          ...values,
+          categories: data,
+          formData: new FormData(),
+        });
+      }
+    });
+  };
+
+  useEffect(() => {
+    init();
   }, []);
 
   const handleChange = (name) => (event) => {
@@ -118,14 +137,20 @@ const AddProduct = () => {
       <div className="form-group">
         <label className="text-muted">Category</label>
         <select onChange={handleChange("category")} className="form-control">
-          <option value="5cde522ad8b1ff1b89c36987">Python</option>
-          <option value="5cde522ad8b1ff1b89c36987">php</option>
+          <option>Select category</option>
+          {categories &&
+            categories.map((c, i) => (
+              <option key={i} value={c._id}>
+                {c.name}
+              </option>
+            ))}
         </select>
       </div>
 
       <div className="form-group">
         <label className="text-muted">Shipping</label>
         <select onChange={handleChange("shipping")} className="form-control">
+          <option>Select</option>
           <option value="0">No</option>
           <option value="1">Yes</option>
         </select>

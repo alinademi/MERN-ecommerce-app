@@ -37,3 +37,14 @@ export const createProduct = (userId, token, product) => {
       console.log(err);
     });
 };
+
+// get categories form the backend
+export const getCategories = () => {
+  return fetch(`${API}/categories`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};
