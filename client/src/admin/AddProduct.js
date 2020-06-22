@@ -37,12 +37,6 @@ const AddProduct = () => {
     formData,
   } = values;
 
-  // run when the component mounts and value changes
-  // whenever handleChange happened, change the state and populate the new formData that is being sent ot the backend
-  useEffect(() => {
-    setValues({ ...values, formData: new FormData() });
-  }, []);
-
   // load categories and set form data
   const init = () => {
     getCategories().then((data) => {
@@ -57,15 +51,15 @@ const AddProduct = () => {
       }
     });
   };
-
+  // run when the component mounts and value changes
+  // whenever handleChange happened, change the state and populate the new formData that is being sent ot the backend
   useEffect(() => {
     init();
   }, []);
 
   const handleChange = (name) => (event) => {
     const value = name === "photo" ? event.target.files[0] : event.target.value; //first change if the value isn't photo
-    formData.set(name, value);
-    //set the state with the grabbed value from form
+    formData.set(name, value); //set the state with the grabbed value from form
     setValues({ ...values, [name]: value });
   };
 
@@ -137,7 +131,7 @@ const AddProduct = () => {
       <div className="form-group">
         <label className="text-muted">Category</label>
         <select onChange={handleChange("category")} className="form-control">
-          <option>Select category</option>
+          <option>Please select</option>
           {categories &&
             categories.map((c, i) => (
               <option key={i} value={c._id}>
@@ -150,7 +144,7 @@ const AddProduct = () => {
       <div className="form-group">
         <label className="text-muted">Shipping</label>
         <select onChange={handleChange("shipping")} className="form-control">
-          <option>Select</option>
+          <option>Please select</option>
           <option value="0">No</option>
           <option value="1">Yes</option>
         </select>
@@ -170,13 +164,43 @@ const AddProduct = () => {
     </form>
   );
 
+  const showError = () => (
+    <div
+      className="alert alert-danger"
+      style={{ display: error ? "" : "none" }}
+    >
+      {error}
+    </div>
+  );
+
+  const showSuccess = () => (
+    <div
+      className="alert alert-success"
+      style={{ display: createdProduct ? "" : "none" }}
+    >
+      <h2>{`${createdProduct}`} has been created!</h2>
+    </div>
+  );
+
+  const showLoading = () =>
+    loading && (
+      <div className="alert alert-info">
+        <h2>Loading...</h2>
+      </div>
+    );
+
   return (
     <Layout
       title="Add a new product"
-      description={`Hey ${user.name}, you can create your products here`}
+      description={`Hey ${user.name},  you can create your products here`}
     >
       <div className="row">
-        <div className="col-md-8 offset-md-2">{newPostForm()}</div>
+        <div className="col-md-8 offset-md-2">
+          {showLoading()}
+          {showSuccess()}
+          {showError()}
+          {newPostForm()}
+        </div>
       </div>
     </Layout>
   );
