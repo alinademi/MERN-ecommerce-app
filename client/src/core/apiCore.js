@@ -42,11 +42,11 @@ export const getFilteredProducts = (skip, limit, filters = {}) => {
       console.log(err);
     });
 };
-// get query string for search results
+
 export const list = (params) => {
   const query = queryString.stringify(params);
-  // console.log("query", query);
-  return fetch(`${API}/products?${query}`, {
+  console.log("query", query);
+  return fetch(`${API}/products/search?${query}`, {
     method: "GET",
   })
     .then((response) => {

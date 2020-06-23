@@ -12,6 +12,7 @@ const {
   listCategories,
   listBySearch,
   photo,
+  listSearch,
 } = require("../controllers/product");
 const { requireSignin, isAuth, isAdmin } = require("../controllers/auth");
 const { userById } = require("../controllers/user");
@@ -59,6 +60,10 @@ router.get("/products/categories", listCategories);
 //get product photo
 //
 router.get("/product/photo/:productId", photo);
+
+//get products by search query
+//
+router.get("/products/search", listSearch);
 
 // list products by search query
 //
