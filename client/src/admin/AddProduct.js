@@ -160,7 +160,7 @@ const AddProduct = () => {
         />
       </div>
 
-      <button className="btn btn-outline-primary">Create Product</button>
+      <button className="btn btn-outline-dark">Create Product</button>
     </form>
   );
 

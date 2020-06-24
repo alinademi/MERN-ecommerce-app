@@ -42,7 +42,7 @@ export const getFilteredProducts = (skip, limit, filters = {}) => {
       console.log(err);
     });
 };
-// handles querystring for list products by search
+
 export const list = (params) => {
   const query = queryString.stringify(params);
   console.log("query", query);
@@ -54,9 +54,19 @@ export const list = (params) => {
     })
     .catch((err) => console.log(err));
 };
-//handles get a single product by id
+
 export const read = (productId) => {
   return fetch(`${API}/product/${productId}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};
+
+export const listRelated = (productId) => {
+  return fetch(`${API}/products/related/${productId}`, {
     method: "GET",
   })
     .then((response) => {

@@ -8,7 +8,7 @@ const Card = ({ product, showViewProductButton = true }) => {
     return (
       showViewProductButton && (
         <Link to={`/product/${product._id}`} className="mr-2">
-          <button className="btn btn-outline-primary mt-2 mb-2">
+          <button className="btn btn-outline-dark mt-2 mb-2">
             View Product
           </button>
         </Link>
@@ -24,9 +24,9 @@ const Card = ({ product, showViewProductButton = true }) => {
 
   const showStock = (quantity) => {
     return quantity > 0 ? (
-      <span className="badge badge-primary badge-pill">In Stock</span>
+      <span className="badge badge-dark badge-pill">In Stock</span>
     ) : (
-      <span className="badge badge-primary badge-pill">Out of Stock</span>
+      <span className="badge badge-dark badge-pill">Out of Stock</span>
     );
   };
 

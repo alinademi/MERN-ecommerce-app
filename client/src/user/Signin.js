@@ -57,7 +57,7 @@ const Signin = () => {
           value={password}
         />
       </div>
-      <button onClick={clickSubmit} className="btn btn-primary">
+      <button onClick={clickSubmit} className="btn btn-dark">
         Submit
       </button>
     </form>
