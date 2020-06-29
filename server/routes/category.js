@@ -1,52 +1,19 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-const {
-  create,
-  categoryById,
-  read,
-  update,
-  remove,
-  list,
-} = require("../controllers/category");
-const { requireSignin, isAuth, isAdmin } = require("../controllers/auth");
-const { userById } = require("../controllers/user");
+const { create, categoryById, read, update, remove, list } = require('../controllers/category');
+const { requireSignin, isAuth, isAdmin } = require('../controllers/auth');
+const { userById } = require('../controllers/user');
 
-//Route for getting one category by id /////
-//
-router.get("/category/:categoryId", read);
+router.get('/category/:categoryId', read);
+router.post('/category/create/:userId', requireSignin, isAuth, isAdmin, create);
+// router.put('/category/:categoryUpdateId/:userId', requireSignin, isAuth, isAdmin, update);
+router.put('/category/:categoryId/:userId', requireSignin, isAuth, isAdmin, update);
 
-//Route for creating a category /////
-//
-router.post("/category/create/:userId", requireSignin, isAuth, isAdmin, create);
+router.delete('/category/:categoryId/:userId', requireSignin, isAuth, isAdmin, remove);
+router.get('/categories', list);
 
-//Route for updating a category /////
-//
-router.put(
-  "/category/:categoryId/:userId",
-  requireSignin,
-  isAuth,
-  isAdmin,
-  update
-);
-
-//Route for deleting a category /////
-//
-router.delete(
-  "/category/:categoryId/:userId",
-  requireSignin,
-  isAuth,
-  isAdmin,
-  remove
-);
-router.get("/categories", list);
-
-// if there is categoryId is in the route as parameter,
-// then run categoryById middleware
-router.param("categoryId", categoryById);
-
-// if there is userId is in the route as parameter,
-// then run userById middleware
-router.param("userId", userById);
+router.param('categoryId', categoryById);
+router.param('userId', userById);
 
 module.exports = router;

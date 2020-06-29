@@ -53,13 +53,15 @@ const Shop = () => {
       }
     });
   };
-  //// FIXME
-  //// load more button is supposed tbe rendered down there from here
+
   const loadMoreButton = () => {
     return (
       size > 0 &&
       size >= limit && (
-        <button onClick={loadMore} className="btn btn-warning mb-5">
+        <button
+          onClick={loadMore}
+          className="btn btn-primary rounded-0 mb-5 col-4"
+        >
           Load more
         </button>
       )
@@ -98,40 +100,47 @@ const Shop = () => {
 
   return (
     <Layout
-      title="Shop Page"
-      description="Search and find books of your choice"
-      className="container-fluid"
+      title="Immerse in the sound "
+      description=""
+      className="container shop-wrapper"
     >
-      <div className="row">
-        <div className="col-4">
-          <h4>Filter by categories</h4>
-          <ul>
-            <Checkbox
-              categories={categories}
-              handleFilters={(filters) => handleFilters(filters, "category")}
-            />
-          </ul>
-
-          <h4>Filter by price range</h4>
-          <div>
-            <RadioBox
-              prices={prices}
-              handleFilters={(filters) => handleFilters(filters, "price")}
-            />
-          </div>
-        </div>
-
-        <div className="col-8">
-          <h2 className="mb-4">Products</h2>
-          <div className="row">
-            {filteredResults.map((product, i) => (
-              <div key={i} className="col-4 mb-3">
-                <Card product={product} />
+      <div className="container mt-5">
+        <div className="row">
+          <div className="col-4 filter-wrapper">
+            <div className="border rounded-0 p-2 mb-2">
+              <h4>Filter by category</h4>
+              <ul>
+                <Checkbox
+                  categories={categories}
+                  handleFilters={(filters) =>
+                    handleFilters(filters, "category")
+                  }
+                />
+              </ul>
+            </div>
+            <div className="border rounded-0 p-2">
+              <h4>Filter by price</h4>
+              <div>
+                <RadioBox
+                  prices={prices}
+                  handleFilters={(filters) => handleFilters(filters, "price")}
+                />
               </div>
-            ))}
+            </div>
           </div>
-          <hr />
-          {loadMoreButton()}
+          <div className="col-8">
+            <h2 className="mb-4">All Products</h2>
+            <hr />
+            <div className="row product-page-main-img">
+              {filteredResults.map((product, i) => (
+                <div key={i} className="col-lg-6 col-md-6 item-entry mb-4">
+                  <Card product={product} />
+                </div>
+              ))}
+            </div>
+            <hr />
+            {loadMoreButton()}
+          </div>
         </div>
       </div>
     </Layout>

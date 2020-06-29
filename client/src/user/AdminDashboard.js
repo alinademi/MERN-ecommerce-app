@@ -10,17 +10,27 @@ const AdminDashboard = () => {
 
   const adminLinks = () => {
     return (
-      <div className="card">
-        <h4 className="card-header">Admin Links</h4>
-        <ul className="list-group">
-          <li className="list-group-item">
+      <div className="card  rounded-0">
+        <h4 className="card-header  rounded-0">Admin Links</h4>
+        <ul className="list-group border-0">
+          <li className="list-group-item  rounded-0">
             <Link className="nav-link" to="/create/category">
               Create Category
             </Link>
           </li>
-          <li className="list-group-item">
+          <li className="list-group-item rounded-0">
             <Link className="nav-link" to="/create/product">
               Create Product
+            </Link>
+          </li>
+          <li className="list-group-item rounded-0">
+            <Link className="nav-link" to="/admin/orders">
+              View Orders
+            </Link>
+          </li>
+          <li className="list-group-item rounded-0">
+            <Link className="nav-link" to="/admin/products">
+              Manage Products
             </Link>
           </li>
         </ul>
@@ -30,12 +40,12 @@ const AdminDashboard = () => {
 
   const adminInfo = () => {
     return (
-      <div className="card mb-5">
-        <h3 className="card-header">User Information</h3>
-        <ul className="list-group">
-          <li className="list-group-item">{name}</li>
-          <li className="list-group-item">{email}</li>
-          <li className="list-group-item">
+      <div className="card mb-5 rounded-0">
+        <h3 className="card-header rounded-0">User Information</h3>
+        <ul className="list-group rounded-0">
+          <li className="list-group-item border-0">{name}</li>
+          <li className="list-group-item border-0">{email}</li>
+          <li className="list-group-item border-0">
             {role === 1 ? "Admin" : "Registered User"}
           </li>
         </ul>
@@ -46,10 +56,10 @@ const AdminDashboard = () => {
   return (
     <Layout
       title="Dashboard"
-      description={`Good day ${name}!`}
-      className="container-fluid"
+      description={`Welcome ${name}!`}
+      className="container mb-5 mt-5"
     >
-      <div className="row">
+      <div className="row mt-5 mb-5">
         <div className="col-3">{adminLinks()}</div>
         <div className="col-9">{adminInfo()}</div>
       </div>

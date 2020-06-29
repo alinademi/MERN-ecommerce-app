@@ -51,15 +51,14 @@ const AddProduct = () => {
       }
     });
   };
-  // run when the component mounts and value changes
-  // whenever handleChange happened, change the state and populate the new formData that is being sent ot the backend
+
   useEffect(() => {
     init();
   }, []);
 
   const handleChange = (name) => (event) => {
-    const value = name === "photo" ? event.target.files[0] : event.target.value; //first change if the value isn't photo
-    formData.set(name, value); //set the state with the grabbed value from form
+    const value = name === "photo" ? event.target.files[0] : event.target.value;
+    formData.set(name, value);
     setValues({ ...values, [name]: value });
   };
 
@@ -175,16 +174,16 @@ const AddProduct = () => {
 
   const showSuccess = () => (
     <div
-      className="alert alert-success"
+      className="alert alert-info"
       style={{ display: createdProduct ? "" : "none" }}
     >
-      <h2>{`${createdProduct}`} has been created!</h2>
+      <h2>{`${createdProduct}`} is created!</h2>
     </div>
   );
 
   const showLoading = () =>
     loading && (
-      <div className="alert alert-info">
+      <div className="alert alert-success">
         <h2>Loading...</h2>
       </div>
     );
@@ -192,7 +191,7 @@ const AddProduct = () => {
   return (
     <Layout
       title="Add a new product"
-      description={`Hey ${user.name},  you can create your products here`}
+      description={`G'day ${user.name}, ready to add a new product?`}
     >
       <div className="row">
         <div className="col-md-8 offset-md-2">

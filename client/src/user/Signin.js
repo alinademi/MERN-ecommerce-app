@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import Layout from "../core/Layout";
 import { signin, authenticate, isAuthenticated } from "../auth";
 
@@ -37,7 +37,7 @@ const Signin = () => {
   };
 
   const signUpForm = () => (
-    <form>
+    <form className="col-md-10 col-lg-7 mx-auto">
       <div className="form-group">
         <label className="text-muted">Email</label>
         <input
@@ -57,7 +57,10 @@ const Signin = () => {
           value={password}
         />
       </div>
-      <button onClick={clickSubmit} className="btn btn-dark">
+      <button
+        onClick={clickSubmit}
+        className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+      >
         Submit
       </button>
     </form>
@@ -93,16 +96,18 @@ const Signin = () => {
   };
 
   return (
-    <Layout
-      title="Signin"
-      description="Signin to Node React E-commerce App"
-      className="container col-md-8 offset-md-2"
-    >
-      {showLoading()}
-      {showError()}
-      {signUpForm()}
-      {redirectUser()}
-    </Layout>
+    <>
+      <Layout
+        title="Signin"
+        description="Signin to Node React E-commerce App"
+        className="container col-md-8 offset-md-2 mt-5 mb-5"
+      >
+        {showLoading()}
+        {showError()}
+        {signUpForm()}
+        {redirectUser()}
+      </Layout>
+    </>
   );
 };
 

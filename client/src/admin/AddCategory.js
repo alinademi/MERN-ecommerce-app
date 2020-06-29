@@ -13,15 +13,15 @@ const AddCategory = () => {
   const { user, token } = isAuthenticated();
 
   const handleChange = (e) => {
-    setError(""); //empty the error if there is any as soon as user starts to interact(starts typing in the field)
-    setName(e.target.value); // set the state to the value of the field
+    setError("");
+    setName(e.target.value);
   };
 
   const clickSubmit = (e) => {
     e.preventDefault();
     setError("");
     setSuccess(false);
-    // making post request to api to create category
+    // make request to api to create category
     createCategory(user._id, token, { name }).then((data) => {
       if (data.error) {
         setError(data.error);
@@ -57,11 +57,10 @@ const AddCategory = () => {
 
   const showError = () => {
     if (error) {
-      return <h3 className="text-danger">Category name already exists</h3>;
+      return <h3 className="text-danger">Category should be unique</h3>;
     }
   };
-  // handles back button to admin dashboard
-  // we can use round brackets because this is a single statement
+
   const goBack = () => (
     <div className="mt-5">
       <Link to="/admin/dashboard" className="text-warning">
@@ -73,7 +72,7 @@ const AddCategory = () => {
   return (
     <Layout
       title="Add a new category"
-      description={`Hey ${user.name}, you can create your categories here`}
+      description={`G'day ${user.name}, ready to add a new category?`}
     >
       <div className="row">
         <div className="col-md-8 offset-md-2">

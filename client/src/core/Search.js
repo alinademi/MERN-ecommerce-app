@@ -64,9 +64,12 @@ const Search = () => {
     return (
       <div>
         <h2 className="mt-4 mb-4">{searchMessage(searched, results)}</h2>
+
         <div className="row">
           {results.map((product, i) => (
-            <Card key={i} product={product} />
+            <div className="col-4 mb-3">
+              <Card key={i} product={product} />
+            </div>
           ))}
         </div>
       </div>
@@ -74,12 +77,15 @@ const Search = () => {
   };
 
   const searchForm = () => (
-    <form onSubmit={searchSubmit}>
-      <span className="input-group-text">
-        <div className="input-group input-group-lg">
-          <div className="input-group-prepend">
-            <select className="btn mr-2" onChange={handleChange("category")}>
-              <option value="All">All Categories</option>
+    <form onSubmit={searchSubmit} className="border-0">
+      <span className="input-group-text rounded-0 bg-gray">
+        <div className="input-group input-group-lg rounded-0">
+          <div className="input-group-prepend  rounded-0">
+            <select
+              className="btn mr-2  rounded-0"
+              onChange={handleChange("category")}
+            >
+              <option value="All">All</option>
               {categories.map((c, i) => (
                 <option key={i} value={c._id}>
                   {c.name}
@@ -90,23 +96,31 @@ const Search = () => {
 
           <input
             type="search"
-            className="form-control"
+            className="form-control bg-gray rounded-0 border-0"
             onChange={handleChange("search")}
             placeholder="Search by name"
           />
         </div>
         <div className="btn input-group-append" style={{ border: "none" }}>
-          <button className="input-group-text">Search</button>
+          <button className="btn btn-primary rounded-0 search-btn">
+            Search Products
+          </button>
         </div>
+      </span>
+      <span className="text-muted">
+        * You can search all products or within a specific category from the
+        above drop-down list{" "}
       </span>
     </form>
   );
 
   return (
-    <div className="row">
-      <div className="container mb-3">{searchForm()}</div>
-      <div className="container-fluid mb-3">{searchedProducts(results)}</div>
-    </div>
+    <>
+      <div className="row">
+        <div className="container mb-3">{searchForm()}</div>
+        <div className="container mb-3">{searchedProducts(results)}</div>
+      </div>
+    </>
   );
 };
 

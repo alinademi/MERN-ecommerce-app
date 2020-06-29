@@ -38,7 +38,7 @@ const Signup = () => {
   };
 
   const signUpForm = () => (
-    <form>
+    <form className="col-md-10 col-lg-7 mx-auto">
       <div className="form-group">
         <label className="text-muted">Name</label>
         <input
@@ -68,7 +68,10 @@ const Signup = () => {
           value={password}
         />
       </div>
-      <button onClick={clickSubmit} className="btn btn-dark">
+      <button
+        onClick={clickSubmit}
+        className="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+      >
         Submit
       </button>
     </form>
@@ -96,7 +99,7 @@ const Signup = () => {
     <Layout
       title="Signup"
       description="Signup to Node React E-commerce App"
-      className="container col-md-8 offset-md-2"
+      className="container col-md-8 offset-md-2 mt-5 mb-5"
     >
       {showSuccess()}
       {showError()}
